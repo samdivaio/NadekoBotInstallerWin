@@ -4,4 +4,3 @@
 CD /D %~dp0NadekoBot\src\NadekoBot
 dotnet run --configuration Release
 goto auto
-del NadekoAutoRun.bat
