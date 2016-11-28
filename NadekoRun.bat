@@ -8,3 +8,4 @@ CD /D %~dp0
 PAUSE >nul 2>&1
 timeout /t 5
 del NadekoRunNormal.bat
+NadekoWinAIO.bat
