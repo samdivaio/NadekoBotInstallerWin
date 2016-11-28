@@ -7,5 +7,3 @@ TITLE NadekoBot - Stopped
 CD /D %~dp0
 timeout /t 5
 del NadekoRunNormal.bat
-timeout /t 2
-NadekoWinAIO.bat
