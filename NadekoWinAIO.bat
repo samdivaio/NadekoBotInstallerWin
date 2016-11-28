@@ -17,7 +17,7 @@ IF ERRORLEVEL 2 GOTO stable
 IF ERRORLEVEL 1 GOTO latest
 
 :latest
-ECHO Make sure you are running Windows 8 or above.
+ECHO Make sure you are running Windows 8 or later.
 timeout /t 10
 ECHO Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\NadekoLatest.bat"
@@ -28,7 +28,7 @@ NadekoLatest.bat
 GOTO End
 
 :stable
-ECHO Make sure you are running Windows 8 or above.
+ECHO Make sure you are running Windows 8 or later.
 timeout /t 10
 ECHO Downloading NadekoBot (Stable), please wait...
 SET "FILENAME=%~dp0\NadekoStable.bat"
