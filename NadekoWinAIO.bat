@@ -53,7 +53,7 @@ ECHO Downloading NadekoBot Auto Run, please wait...
 SET "FILENAME=%~dp0\NadekoAutoRun.bat"
 bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://github.com/Kwoth/NadekoBotInstallerWin/raw/master/NadekoAutoRun.bat "%FILENAME%"
 ECHO.
-ECHO Running Nadeko with Auto Restart you will have to close the session to stop the auto restart.
+ECHO Running Nadeko with Auto Restart, you will have to close the session to stop the auto restart.
 timeout /t 15
 NadekoAutoRun.bat
 
