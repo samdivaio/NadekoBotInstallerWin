@@ -21,7 +21,7 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 ECHO Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\NadekoLatest.bat"
-bitsadmin.exe /transfer "Downloading Nadeko (Latest)" /priority high https://github.com/Kwoth/NadekoBot/scripts/raw/master/NadekoInstallerLatest.bat "%FILENAME%"
+bitsadmin.exe /transfer "Downloading Nadeko (Latest)" /priority high https://raw.githubusercontent.com/Kwoth/NadekoBot/dev/scripts/NadekoInstallerLatest.bat "%FILENAME%"
 ECHO NadekoBot Dev Build (latest) downloaded.
 timeout /t 5
 NadekoLatest.bat
@@ -32,7 +32,7 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 ECHO Downloading NadekoBot (Stable), please wait...
 SET "FILENAME=%~dp0\NadekoStable.bat"
-bitsadmin.exe /transfer "Downloading Nadeko (Stable)" /priority high https://github.com/Kwoth/NadekoBot/scripts/raw/master/NadekoInstaller.bat "%FILENAME%"
+bitsadmin.exe /transfer "Downloading Nadeko (Stable)" /priority high https://raw.githubusercontent.com/Kwoth/NadekoBot/dev/scripts/NadekoInstaller.bat "%FILENAME%"
 ECHO NadekoBot Stable build downloaded.
 timeout /t 5
 NadekoStable.bat
@@ -41,7 +41,7 @@ GOTO End
 :runnormal
 ECHO Downloading NadekoBot Run, please wait...
 SET "FILENAME=%~dp0\NadekoRunNormal.bat"
-bitsadmin.exe /transfer "Downloading Nadeko Run (normal)" /priority high https://github.com/Kwoth/NadekoBot/scripts/raw/master/NadekoRun.bat "%FILENAME%"
+bitsadmin.exe /transfer "Downloading Nadeko Run (normal)" /priority high https://raw.githubusercontent.com/Kwoth/NadekoBot/dev/scripts/NadekoRun.bat "%FILENAME%"
 ECHO.
 ECHO Running Nadeko Normally, "if" you are running this to check Nadeko, use ".die" command on discord to stop Nadeko.
 timeout /t 10
@@ -51,7 +51,7 @@ GOTO End
 :autorestart
 ECHO Downloading NadekoBot Auto Run, please wait...
 SET "FILENAME=%~dp0\NadekoAutoRun.bat"
-bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://github.com/Kwoth/NadekoBot/scripts/raw/master/NadekoAutoRun.bat "%FILENAME%"
+bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://raw.githubusercontent.com/Kwoth/NadekoBot/dev/scripts/NadekoAutoRun.bat "%FILENAME%"
 ECHO.
 ECHO Running Nadeko with Auto Restart, you will have to close the session to stop the auto restart.
 timeout /t 15
