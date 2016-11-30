@@ -1,6 +1,7 @@
 @ECHO OFF
 
 SET root=%~dp0
+CD /D %root%
 
 CLS
 ECHO 1.Download Latest Build
@@ -27,7 +28,7 @@ SET "FILENAME=%~dp0\Latest.bat"
 bitsadmin.exe /transfer "Downloading Nadeko (Latest)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Latest.bat "%FILENAME%"
 ECHO NadekoBot Dev Build (latest) downloaded.
 timeout /t 5
-%root%/Latest.bat
+CALL Latest.bat
 GOTO End
 
 :stable
@@ -38,7 +39,7 @@ SET "FILENAME=%~dp0\Stable.bat"
 bitsadmin.exe /transfer "Downloading Nadeko (Stable)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Stable.bat "%FILENAME%"
 ECHO NadekoBot Stable build downloaded.
 timeout /t 5
-%root%/Stable.bat
+CALL Stable.bat
 GOTO End
 
 :runnormal
@@ -48,7 +49,7 @@ bitsadmin.exe /transfer "Downloading Nadeko Run (normal)" /priority high https:/
 ECHO.
 ECHO Running Nadeko Normally, "if" you are running this to check Nadeko, use ".die" command on discord to stop Nadeko.
 timeout /t 10
-%root%/NadekoRunNormal.bat
+CALL NadekoRunNormal.bat
 GOTO End
 
 :autorestart
@@ -58,7 +59,7 @@ bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://git
 ECHO.
 ECHO Running Nadeko with Auto Restart, you will have to close the session to stop the auto restart.
 timeout /t 15
-%root%/NadekoAutoRun.bat
+CALL NadekoAutoRun.bat
 GOTO End
 
 :exit
@@ -66,4 +67,4 @@ exit
 
 :End
 pause
-%root%/NadekoInstaller.bat
+CALL NadekoInstaller.bat
