@@ -77,6 +77,8 @@ ECHO.
 ECHO Make sure you are running this as Administrator! 
 ECHO If not, then please restart "NadekoInstaller.bat" as Administrator.
 ECHO.
+ECHO DO NOT USE "Windows PowerShell" for ffmpeg Installation!
+ECHO.
 timeout /t 30
 ECHO.
 ECHO Please wait...
