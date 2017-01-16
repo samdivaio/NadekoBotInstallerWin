@@ -1,5 +1,5 @@
 @ECHO OFF
-
+TITLE NadekoBot Client!
 SET root=%~dp0
 CD /D %root%
 
@@ -9,11 +9,14 @@ ECHO 2.Download Stable Build
 ECHO 3.Run NadekoBot (normally)
 ECHO 4.Run NadekoBot with Auto Restart (check "if" nadeko is working properly, before using this)
 ECHO 5.To exit
+ECHO 6.Install ffmpeg (for music)
 ECHO.
-
-CHOICE /C 12345 /M "Enter your choice:"
+ECHO Make sure you are running NadekoInstaller.bat as Administrator!
+ECHO.
+CHOICE /C 123456 /M "Enter your choice:"
 
 :: Note - list ERRORLEVELS in decreasing order
+IF ERRORLEVEL 6 GOTO ffmpeg
 IF ERRORLEVEL 5 GOTO exit
 IF ERRORLEVEL 4 GOTO autorestart
 IF ERRORLEVEL 3 GOTO runnormal
@@ -64,6 +67,31 @@ GOTO End
 
 :exit
 exit
+
+:ffmpeg
+TITLE NadekoBot FFMPEG Installer! 
+ECHO Welcome to NadekoBot FFMPEG Installer! 
+ECHO.
+ECHO Installing ffmpeg in "%SystemDrive%\ffmpeg\"...
+ECHO.
+ECHO Make sure you are running this as Administrator! 
+ECHO If not, then please restart "NadekoInstaller.bat" as Administrator.
+ECHO.
+timeout /t 30
+ECHO.
+ECHO Please wait...
+mkdir %SystemDrive%\ffmpeg\
+SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
+bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170111-e71b811-win64-static.zip "%FILENAME%"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
+ECHO Backing up PATH registry to "%SystemDrive%\ffmpeg"
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+timeout /t 5
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static\bin"
+ECHO ffmpeg path has been set!
+ECHO.
+ECHO ffmpeg Installation complete!
+GOTO End
 
 :End
 pause
