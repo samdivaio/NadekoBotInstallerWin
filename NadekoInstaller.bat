@@ -69,7 +69,10 @@ GOTO End
 exit
 
 :ffmpeg
-TITLE NadekoBot FFMPEG Installer! 
+IF EXIST "%PROGRAMFILES(X86)%" (GOTO 64BIT) ELSE (GOTO 32BIT)
+
+:64BIT
+TITLE NadekoBot FFMPEG Installer for 64bit OS! 
 ECHO Welcome to NadekoBot FFMPEG Installer! 
 ECHO.
 ECHO Installing ffmpeg in "%SystemDrive%\ffmpeg\"...
@@ -90,6 +93,33 @@ ECHO Backing up PATH registry to "%SystemDrive%\ffmpeg"
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
 timeout /t 5
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static\bin"
+ECHO ffmpeg path has been set!
+ECHO.
+ECHO ffmpeg Installation complete!
+GOTO End
+
+:32BIT
+TITLE NadekoBot FFMPEG Installer for 32bit OS! 
+ECHO Welcome to NadekoBot FFMPEG Installer! 
+ECHO.
+ECHO Installing ffmpeg in "%SystemDrive%\ffmpeg\"...
+ECHO.
+ECHO Make sure you are running this as Administrator! 
+ECHO If not, then please restart "NadekoInstaller.bat" as Administrator.
+ECHO.
+ECHO DO NOT USE "Windows PowerShell" for ffmpeg Installation!
+ECHO.
+timeout /t 30
+ECHO.
+ECHO Please wait...
+mkdir %SystemDrive%\ffmpeg\
+SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
+bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170125-2080bc3-win32-static.zip "%FILENAME%"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
+ECHO Backing up PATH registry to "%SystemDrive%\ffmpeg"
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+timeout /t 5
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
 ECHO ffmpeg Installation complete!
