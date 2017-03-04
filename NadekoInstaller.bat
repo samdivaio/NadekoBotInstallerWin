@@ -31,7 +31,8 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 TITLE Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\Latest.bat"
-bitsadmin.exe /transfer "Downloading Nadeko (Latest)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Latest.bat "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/master/scripts/Latest.bat -OutFile %FILENAME%"
+::bitsadmin.exe /transfer "Downloading Nadeko (Latest)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Latest.bat "%FILENAME%"
 ECHO NadekoBot Dev Build (latest) downloaded.
 timeout /t 5
 CALL Latest.bat
@@ -42,7 +43,8 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 TITLE Downloading NadekoBot (Stable), please wait...
 SET "FILENAME=%~dp0\Stable.bat"
-bitsadmin.exe /transfer "Downloading Nadeko (Stable)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Stable.bat "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/master/scripts/Stable.bat -OutFile %FILENAME%"
+::bitsadmin.exe /transfer "Downloading Nadeko (Stable)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Stable.bat "%FILENAME%"
 ECHO NadekoBot Stable build downloaded.
 timeout /t 5
 CALL Stable.bat
@@ -51,7 +53,8 @@ GOTO End
 :runnormal
 TITLE Downloading NadekoBot Run, please wait...
 SET "FILENAME=%~dp0\NadekoRunNormal.bat"
-bitsadmin.exe /transfer "Downloading Nadeko Run (normal)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoRun.bat "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoRun.bat -OutFile %FILENAME%"
+::bitsadmin.exe /transfer "Downloading Nadeko Run (normal)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoRun.bat "%FILENAME%"
 ECHO.
 ECHO Running Nadeko Normally, "if" you are running this to check Nadeko, use ".die" command on discord to stop Nadeko.
 timeout /t 10
@@ -61,7 +64,8 @@ GOTO End
 :autorestart
 TITLE Downloading NadekoBot Auto Run, please wait...
 SET "FILENAME=%~dp0\NadekoAutoRun.bat"
-bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoAutoRun.bat "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoAutoRun.bat -OutFile %FILENAME%"
+::bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoAutoRun.bat "%FILENAME%"
 ECHO.
 ECHO Running Nadeko with Auto Restart, you will have to close the session to stop the auto restart.
 timeout /t 15
@@ -82,17 +86,33 @@ ECHO If not, then please restart "NadekoInstaller.bat" as Administrator.
 ECHO.
 ECHO DO NOT USE "Windows PowerShell" for ffmpeg Installation!
 ECHO.
-timeout /t 30
+pause
 ECHO.
 ECHO Please wait...
 mkdir %SystemDrive%\ffmpeg\
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
-bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170111-e71b811-win64-static.zip "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170225-7e4f32f-win64-static.zip -OutFile %FILENAME%"
+ECHO.
+ECHO ffmpeg zip downloaded: %FILENAME%...
+ECHO Press any key to continue extraction...
+pause
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static"
+::bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170111-e71b811-win64-static.zip "%FILENAME%"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
-ECHO Backing up PATH registry to "%SystemDrive%\ffmpeg"
+ECHO.
+ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
+ECHO.
+pause
+ECHO.
+ECHO Backing up System PATH registry to "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backup.reg", Choose "No"!
+ECHO.
+pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
 timeout /t 5
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static\bin"
+ECHO Registry file backup complete!
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
 ECHO ffmpeg Installation complete!
@@ -109,17 +129,33 @@ ECHO If not, then please restart "NadekoInstaller.bat" as Administrator.
 ECHO.
 ECHO DO NOT USE "Windows PowerShell" for ffmpeg Installation!
 ECHO.
-timeout /t 30
+pause
 ECHO.
 ECHO Please wait...
 mkdir %SystemDrive%\ffmpeg\
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
-bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170125-2080bc3-win32-static.zip "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170225-7e4f32f-win32-static.zip -OutFile %FILENAME%"
+ECHO.
+ECHO ffmpeg zip downloaded: %FILENAME%...
+ECHO Press any key to continue extraction...
+pause
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static"
+::bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170125-2080bc3-win32-static.zip "%FILENAME%"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
-ECHO Backing up PATH registry to "%SystemDrive%\ffmpeg"
+ECHO.
+ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
+ECHO.
+pause
+ECHO.
+ECHO Backing up System PATH registry to "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backup.reg", Choose "No"!
+ECHO.
+pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
 timeout /t 5
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static\bin"
+ECHO Registry file backup complete!
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
 ECHO ffmpeg Installation complete!
@@ -132,7 +168,8 @@ CALL NadekoInstaller.bat
 :credentials
 TITLE Downloading NadekoBot credentials.json setup files, please wait...
 SET "FILENAME=%~dp0\NadekoCredentials.bat"
-bitsadmin.exe /transfer "Downloading NadekoBot credentials.json setup files" /priority high https://github.com/samdivaio/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat "%FILENAME%"
+powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat -OutFile %FILENAME%"
+::bitsadmin.exe /transfer "Downloading NadekoBot credentials.json setup files" /priority high https://github.com/samdivaio/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat "%FILENAME%"
 ECHO NadekoBot credentials.json setup files downloaded.
 timeout /t 5
 CALL NadekoCredentials.bat
