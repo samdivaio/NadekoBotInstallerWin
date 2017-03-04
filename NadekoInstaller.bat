@@ -8,16 +8,19 @@ ECHO 1.Download Latest Build
 ECHO 2.Download Stable Build
 ECHO 3.Run NadekoBot (normally)
 ECHO 4.Run NadekoBot with Auto Restart (check "if" nadeko is working properly, before using this)
-ECHO 5.To exit
+ECHO 5.Setup credentials.json
 ECHO 6.Install ffmpeg (for music)
+ECHO 7.To exit
+
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
 ECHO.
-CHOICE /C 123456 /M "Enter your choice:"
+CHOICE /C 1234567 /M "Enter your choice:"
 
 :: Note - list ERRORLEVELS in decreasing order
+IF ERRORLEVEL 7 GOTO exit
 IF ERRORLEVEL 6 GOTO ffmpeg
-IF ERRORLEVEL 5 GOTO exit
+IF ERRORLEVEL 5 GOTO credentials
 IF ERRORLEVEL 4 GOTO autorestart
 IF ERRORLEVEL 3 GOTO runnormal
 IF ERRORLEVEL 2 GOTO stable
@@ -26,7 +29,7 @@ IF ERRORLEVEL 1 GOTO latest
 :latest
 ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
-ECHO Downloading NadekoBot (Latest), please wait...
+TITLE Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\Latest.bat"
 bitsadmin.exe /transfer "Downloading Nadeko (Latest)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Latest.bat "%FILENAME%"
 ECHO NadekoBot Dev Build (latest) downloaded.
@@ -37,7 +40,7 @@ GOTO End
 :stable
 ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
-ECHO Downloading NadekoBot (Stable), please wait...
+TITLE Downloading NadekoBot (Stable), please wait...
 SET "FILENAME=%~dp0\Stable.bat"
 bitsadmin.exe /transfer "Downloading Nadeko (Stable)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/Stable.bat "%FILENAME%"
 ECHO NadekoBot Stable build downloaded.
@@ -46,7 +49,7 @@ CALL Stable.bat
 GOTO End
 
 :runnormal
-ECHO Downloading NadekoBot Run, please wait...
+TITLE Downloading NadekoBot Run, please wait...
 SET "FILENAME=%~dp0\NadekoRunNormal.bat"
 bitsadmin.exe /transfer "Downloading Nadeko Run (normal)" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoRun.bat "%FILENAME%"
 ECHO.
@@ -56,7 +59,7 @@ CALL NadekoRunNormal.bat
 GOTO End
 
 :autorestart
-ECHO Downloading NadekoBot Auto Run, please wait...
+TITLE Downloading NadekoBot Auto Run, please wait...
 SET "FILENAME=%~dp0\NadekoAutoRun.bat"
 bitsadmin.exe /transfer "Downloading Nadeko Auto-Run" /priority high https://github.com/Kwoth/NadekoBot/raw/master/scripts/NadekoAutoRun.bat "%FILENAME%"
 ECHO.
@@ -64,9 +67,6 @@ ECHO Running Nadeko with Auto Restart, you will have to close the session to sto
 timeout /t 15
 CALL NadekoAutoRun.bat
 GOTO End
-
-:exit
-exit
 
 :ffmpeg
 IF EXIST "%PROGRAMFILES(X86)%" (GOTO 64BIT) ELSE (GOTO 32BIT)
@@ -126,5 +126,17 @@ ECHO ffmpeg Installation complete!
 GOTO End
 
 :End
-pause
+cls
 CALL NadekoInstaller.bat
+
+:credentials
+TITLE Downloading NadekoBot credentials.json setup files, please wait...
+SET "FILENAME=%~dp0\NadekoCredentials.bat"
+bitsadmin.exe /transfer "Downloading NadekoBot credentials.json setup files" /priority high https://github.com/samdivaio/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat "%FILENAME%"
+ECHO NadekoBot credentials.json setup files downloaded.
+timeout /t 5
+CALL NadekoCredentials.bat
+GOTO End
+
+:exit
+exit

@@ -57,5 +57,6 @@ echo.
 echo Saved!
 echo credentials.json setup is now complete!
 echo.
+CD /D "%root%"
 pause
 del NadekoCredentials.bat
