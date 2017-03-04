@@ -87,15 +87,16 @@ ECHO.
 ECHO DO NOT USE "Windows PowerShell" for ffmpeg Installation!
 ECHO.
 pause
-ECHO.
-ECHO Please wait...
 mkdir %SystemDrive%\ffmpeg\
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
+ECHO.
+ECHO Downloading ffmpeg, please wait...
 powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170225-7e4f32f-win64-static.zip -OutFile %FILENAME%"
 ECHO.
 ECHO ffmpeg zip downloaded: %FILENAME%...
+ECHO.
 ECHO Press any key to continue extraction...
-pause
+pause >nul 2>&1
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static"
 ::bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170111-e71b811-win64-static.zip "%FILENAME%"
@@ -110,12 +111,12 @@ ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backu
 ECHO.
 pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
-timeout /t 5
 ECHO Registry file backup complete!
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
 ECHO ffmpeg Installation complete!
+pause
 GOTO End
 
 :32BIT
@@ -130,15 +131,16 @@ ECHO.
 ECHO DO NOT USE "Windows PowerShell" for ffmpeg Installation!
 ECHO.
 pause
-ECHO.
-ECHO Please wait...
 mkdir %SystemDrive%\ffmpeg\
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
+ECHO.
+ECHO Downloading ffmpeg, please wait...
 powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170225-7e4f32f-win32-static.zip -OutFile %FILENAME%"
 ECHO.
 ECHO ffmpeg zip downloaded: %FILENAME%...
+ECHO.
 ECHO Press any key to continue extraction...
-pause
+pause >nul 2>&1
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static"
 ::bitsadmin.exe /transfer "Downloading ffmpeg" /priority high https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170125-2080bc3-win32-static.zip "%FILENAME%"
@@ -153,12 +155,12 @@ ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backu
 ECHO.
 pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
-timeout /t 5
 ECHO Registry file backup complete!
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
 ECHO ffmpeg Installation complete!
+pause
 GOTO End
 
 :End
@@ -168,7 +170,7 @@ CALL NadekoInstaller.bat
 :credentials
 TITLE Downloading NadekoBot credentials.json setup files, please wait...
 SET "FILENAME=%~dp0\NadekoCredentials.bat"
-powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat -OutFile %FILENAME%"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat -OutFile %FILENAME%"
 ::bitsadmin.exe /transfer "Downloading NadekoBot credentials.json setup files" /priority high https://github.com/samdivaio/NadekoBotInstallerWin/raw/master/NadekoCredentials.bat "%FILENAME%"
 ECHO NadekoBot credentials.json setup files downloaded.
 timeout /t 5
