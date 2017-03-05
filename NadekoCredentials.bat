@@ -17,11 +17,12 @@ echo Please make sure you have all the required informations to setup the creden
 echo Refer to the hosting documents for more info...
 echo.
 pause
+cls
 set /p client=Please enter your Client ID:
 cls
 set /p botid=Please enter your Bot ID (it is same as the client ID for new users):
 cls
-set /p token=Please enter your Bot Token (it is not the Client Secret, Please make sure you enter the Token and not Client Secret):
+set /p token=Please enter your Bot Token ~59 characters long(it is not the Client Secret, Please make sure you enter the Token and not Client Secret):
 cls
 set /p owner=Please enter your Owner ID:
 cls
@@ -52,7 +53,7 @@ echo   "CarbonKey": "",
 echo   "Db": null,
 echo   "TotalShards": 1
 echo }
-) > %root%NadekoBot\src\NadekoBot\credentials.json
+) > "%root%NadekoBot\src\NadekoBot\credentials.json"
 echo.
 echo Saved!
 echo credentials.json setup is now complete!
