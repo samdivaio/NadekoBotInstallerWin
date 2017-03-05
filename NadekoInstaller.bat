@@ -110,9 +110,10 @@ ECHO Registry file backup complete!
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
-ECHO ffmpeg Installation complete!
-pause
-GOTO End
+ECHO ffmpeg Installation complete! (Restarting NadekoInstaller.bat is required)
+ECHO Press any key to exit...
+pause >nul 2>&1
+GOTO exit
 
 :32BIT
 TITLE NadekoBot FFMPEG Installer for 32bit OS! 
@@ -153,9 +154,10 @@ ECHO Registry file backup complete!
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static\bin"
 ECHO ffmpeg path has been set!
 ECHO.
-ECHO ffmpeg Installation complete!
-pause
-GOTO End
+ECHO ffmpeg Installation complete! (Restarting NadekoInstaller.bat is required)
+ECHO Press any key to exit...
+pause >nul 2>&1
+GOTO exit
 
 :End
 cls
