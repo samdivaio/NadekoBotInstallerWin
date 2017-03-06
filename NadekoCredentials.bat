@@ -3,7 +3,7 @@
 SET root=%~dp0
 CD /D %root%
 
-IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json" (GOTO installed) ELSE (GOTO notinstalled)
+IF EXIST "%root%NadekoBot\src\NadekoBot" (GOTO installed) ELSE (GOTO notinstalled)
 
 :notinstalled
 title Failed Creating NadekoBot credentials.json
