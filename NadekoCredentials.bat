@@ -17,6 +17,20 @@ echo Please make sure you have all the required informations to setup the creden
 echo Refer to the hosting documents for more info...
 echo.
 pause
+IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json" (GOTO backup) ELSE (GOTO create)
+
+:backup
+echo.
+echo Backing up existing credentials.json...
+IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup3" del "%root%NadekoBot\src\NadekoBot\credentials.json.backup3"
+IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup2" rename "%root%NadekoBot\src\NadekoBot\credentials.json.backup2" "credentials.json.backup3"
+IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup" rename "%root%NadekoBot\src\NadekoBot\credentials.json.backup" "credentials.json.backup2"
+rename "%root%NadekoBot\src\NadekoBot\credentials.json" "credentials.json.backup"
+echo.
+pause
+GOTO create
+
+:create
 cls
 set /p client=Please enter your Client ID:
 cls
