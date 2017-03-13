@@ -27,6 +27,8 @@ IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup2" rename "%root%
 IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup" rename "%root%NadekoBot\src\NadekoBot\credentials.json.backup" "credentials.json.backup2"
 rename "%root%NadekoBot\src\NadekoBot\credentials.json" "credentials.json.backup"
 echo.
+echo Back up complete...
+echo.
 pause
 GOTO create
 
