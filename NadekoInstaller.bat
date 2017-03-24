@@ -17,3 +17,4 @@ IF EXIST "%root%NadekoAutoRun.bat" del "%root%NadekoAutoRun.bat"
 IF EXIST "%root%NadekoRun.bat" del "%root%NadekoRun.bat"
 IF EXIST "%root%Stable.bat" del "%root%Stable.bat"
 IF EXIST "%root%Latest.bat" del "%root%Latest.bat"
+pause
