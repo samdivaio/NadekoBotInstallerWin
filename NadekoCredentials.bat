@@ -7,13 +7,17 @@ IF EXIST "%root%NadekoBot\src\NadekoBot" (GOTO installed) ELSE (GOTO notinstalle
 
 :notinstalled
 title Failed Creating NadekoBot credentials.json
+echo.
 echo You don't have NadekoBot installed. Please Install NadekoBot (latest or stable) build before trying again!
+echo.
 pause
 del NadekoCredentials.bat
 
 :installed
 title Creating NadekoBot credentials.json
+echo.
 echo Please make sure you have all the required informations to setup the credentials.json before continuing...
+echo.
 echo Refer to the hosting documents for more info...
 echo.
 pause
@@ -26,6 +30,8 @@ IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup3" del "%root%Nad
 IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup2" rename "%root%NadekoBot\src\NadekoBot\credentials.json.backup2" "credentials.json.backup3"
 IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json.backup" rename "%root%NadekoBot\src\NadekoBot\credentials.json.backup" "credentials.json.backup2"
 rename "%root%NadekoBot\src\NadekoBot\credentials.json" "credentials.json.backup"
+echo.
+echo Back up complete...
 echo.
 pause
 GOTO create
