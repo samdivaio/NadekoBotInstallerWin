@@ -32,7 +32,7 @@ timeout /t 10
 TITLE Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\Latest.bat"
 powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/Latest.bat -OutFile '%FILENAME%'"
-ECHO NadekoBot Dev Build (latest) downloaded.
+ECHO NadekoBot Latest build script downloaded.
 timeout /t 5
 CALL Latest.bat
 GOTO End
@@ -43,7 +43,7 @@ timeout /t 10
 TITLE Downloading NadekoBot (Stable), please wait...
 SET "FILENAME=%~dp0\Stable.bat"
 powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/Stable.bat -OutFile '%FILENAME%'"
-ECHO NadekoBot Stable build downloaded.
+ECHO NadekoBot Stable build script downloaded.
 timeout /t 5
 CALL Stable.bat
 GOTO End
