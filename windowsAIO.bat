@@ -31,7 +31,7 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 TITLE Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\Latest.bat"
-powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/Latest.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/Latest.bat -OutFile '%FILENAME%'"
 ECHO NadekoBot Latest build script downloaded.
 timeout /t 5
 CALL Latest.bat
@@ -42,7 +42,7 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 TITLE Downloading NadekoBot (Stable), please wait...
 SET "FILENAME=%~dp0\Stable.bat"
-powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/Stable.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/Stable.bat -OutFile '%FILENAME%'"
 ECHO NadekoBot Stable build script downloaded.
 timeout /t 5
 CALL Stable.bat
@@ -51,7 +51,7 @@ GOTO End
 :runnormal
 TITLE Downloading NadekoBot Run, please wait...
 SET "FILENAME=%~dp0\NadekoRunNormal.bat"
-powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/NadekoRun.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/NadekoRun.bat -OutFile '%FILENAME%'"
 ECHO.
 ECHO Running Nadeko Normally, "if" you are running this to check Nadeko, use ".die" command on discord to stop Nadeko.
 timeout /t 10
@@ -61,7 +61,7 @@ GOTO End
 :autorestart
 TITLE Downloading NadekoBot Auto Run, please wait...
 SET "FILENAME=%~dp0\NadekoAutoRun.bat"
-powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/NadekoAutoRun.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/NadekoAutoRun.bat -OutFile '%FILENAME%'"
 ECHO.
 ECHO Running Nadeko with Auto Restart, you will have to close the session to stop the auto restart.
 timeout /t 15
@@ -199,7 +199,7 @@ CALL NadekoInstaller.bat
 :credentials
 TITLE Downloading NadekoBot credentials.json setup files, please wait...
 SET "FILENAME=%~dp0\NadekoCredentials.bat"
-powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.4/NadekoCredentials.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/NadekoCredentials.bat -OutFile '%FILENAME%'"
 ECHO NadekoBot credentials.json setup files downloaded.
 timeout /t 5
 CALL NadekoCredentials.bat
