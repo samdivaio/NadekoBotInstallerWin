@@ -55,6 +55,9 @@ IF EXIST "%root%NadekoBot\" (GOTO :backupinstall) ELSE (GOTO :freshinstall)
 	::Copies the credentials and database from the backed up data to the new folder
 	COPY "%root%NadekoBot_Old\src\NadekoBot\credentials.json" "%installtemp%NadekoBot\src\NadekoBot\credentials.json" >nul 2>&1
 	IF %ERRORLEVEL% GEQ 8 (GOTO :copyerror)
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" >nul 2>&1)
+	timeout /t 2
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( DEL "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" >nul 2>&1)
 	ECHO.
 	ECHO credentials.json copied...
 	ROBOCOPY "%root%NadekoBot_Old\src\NadekoBot\bin" "%installtemp%NadekoBot\src\NadekoBot\bin" /E >nul 2>&1
