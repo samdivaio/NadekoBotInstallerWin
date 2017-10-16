@@ -20,7 +20,7 @@ CD /D "%installtemp%"
 ::Downloads the latest version of Nadeko
 ECHO Downloading Nadeko...
 ECHO.
-git clone -b 1.4 --recursive --depth 1 --progress https://github.com/Kwoth/NadekoBot.git >nul
+git clone -b 1.9 --recursive --depth 1 --progress https://github.com/Kwoth/NadekoBot.git >nul
 IF %ERRORLEVEL% EQU 128 (GOTO :giterror)
 TITLE Installing NadekoBot, please wait...
 ECHO.
@@ -59,9 +59,13 @@ IF EXIST "%root%NadekoBot\" (GOTO :backupinstall) ELSE (GOTO :freshinstall)
 	ECHO credentials.json copied...
 	ROBOCOPY "%root%NadekoBot_Old\src\NadekoBot\bin" "%installtemp%NadekoBot\src\NadekoBot\bin" /E >nul 2>&1
 	IF %ERRORLEVEL% GEQ 8 (GOTO :copyerror)
-	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" >nul 2>&1)
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" >nul 2>&1)
+	timeout /t 2
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" >nul 2>&1)
 	timeout /t 2
 	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( DEL "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" >nul 2>&1)
+	ECHO.
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( DEL "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" >nul 2>&1)
 	ECHO.
 	ECHO bin folder copied...
 	RD /S /Q "%root%NadekoBot_Old\src\NadekoBot\data\musicdata"
@@ -127,7 +131,7 @@ timeout /t 5
 IF EXIST "%root%NadekoBot\src\NadekoBot\_libs\32\opus.dll" (GOTO copyopus) ELSE (GOTO downloadopus)
 :downloadsodium
 SET "FILENAME=%~dp0\NadekoBot\src\NadekoBot\libsodium.dll"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/dev/src/NadekoBot/_libs/32/libsodium.dll -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/1.9/src/NadekoBot/_libs/32/libsodium.dll -OutFile '%FILENAME%'"
 ECHO libsodium.dll downloaded.
 ECHO.
 timeout /t 5
@@ -139,7 +143,7 @@ ECHO opus.dll copied.
 GOTO end
 :downloadopus
 SET "FILENAME=%~dp0\NadekoBot\src\NadekoBot\opus.dll"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/dev/src/NadekoBot/_libs/32/opus.dll -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/1.9/src/NadekoBot/_libs/32/opus.dll -OutFile '%FILENAME%'"
 ECHO opus.dll downloaded.
 GOTO end
 :end

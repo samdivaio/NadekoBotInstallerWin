@@ -1,29 +1,27 @@
 @ECHO OFF
-TITLE NadekoBot Client!
+TITLE NadekoBot Client for v1.9+!
 SET "root=%~dp0"
 CD /D "%root%"
 
 CLS
 ECHO 1.Download Latest Build
-ECHO 2.Download Stable Build
-ECHO 3.Run NadekoBot (normally)
-ECHO 4.Run NadekoBot with Auto Restart (check "if" nadeko is working properly, before using this)
-ECHO 5.Setup credentials.json
-ECHO 6.Install ffmpeg (for music)
-ECHO 7.To exit
+ECHO 2.Run NadekoBot (normally)
+ECHO 3.Run NadekoBot with Auto Restart (check "if" nadeko is working properly, before using this)
+ECHO 4.Setup credentials.json
+ECHO 5.Install ffmpeg (for music)
+ECHO 6.To exit
 
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
 ECHO.
-CHOICE /C 1234567 /M "Enter your choice:"
+CHOICE /C 123456 /M "Enter your choice:"
 
 :: Note - list ERRORLEVELS in decreasing order
-IF ERRORLEVEL 7 GOTO exit
-IF ERRORLEVEL 6 GOTO ffmpeg
-IF ERRORLEVEL 5 GOTO credentials
-IF ERRORLEVEL 4 GOTO autorestart
-IF ERRORLEVEL 3 GOTO runnormal
-IF ERRORLEVEL 2 GOTO stable
+IF ERRORLEVEL 6 GOTO exit
+IF ERRORLEVEL 5 GOTO ffmpeg
+IF ERRORLEVEL 4 GOTO credentials
+IF ERRORLEVEL 3 GOTO autorestart
+IF ERRORLEVEL 2 GOTO runnormal
 IF ERRORLEVEL 1 GOTO latest
 
 :latest
@@ -31,27 +29,16 @@ ECHO Make sure you are running it on Windows 8 or later.
 timeout /t 10
 TITLE Downloading NadekoBot (Latest), please wait...
 SET "FILENAME=%~dp0\Latest.bat"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/Latest.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.9/Latest.bat -OutFile '%FILENAME%'"
 ECHO NadekoBot Latest build script downloaded.
 timeout /t 5
 CALL Latest.bat
 GOTO End
 
-:stable
-ECHO Make sure you are running it on Windows 8 or later.
-timeout /t 10
-TITLE Downloading NadekoBot (Stable), please wait...
-SET "FILENAME=%~dp0\Stable.bat"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/Stable.bat -OutFile '%FILENAME%'"
-ECHO NadekoBot Stable build script downloaded.
-timeout /t 5
-CALL Stable.bat
-GOTO End
-
 :runnormal
 TITLE Downloading NadekoBot Run, please wait...
 SET "FILENAME=%~dp0\NadekoRunNormal.bat"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/NadekoRun.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.9/NadekoRun.bat -OutFile '%FILENAME%'"
 ECHO.
 ECHO Running Nadeko Normally, "if" you are running this to check Nadeko, use ".die" command on discord to stop Nadeko.
 timeout /t 10
@@ -61,7 +48,7 @@ GOTO End
 :autorestart
 TITLE Downloading NadekoBot Auto Run, please wait...
 SET "FILENAME=%~dp0\NadekoAutoRun.bat"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/NadekoAutoRun.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.9/NadekoAutoRun.bat -OutFile '%FILENAME%'"
 ECHO.
 ECHO Running Nadeko with Auto Restart, you will have to close the session to stop the auto restart.
 timeout /t 15
@@ -107,7 +94,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest http://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20170601-bd1179e-win64-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20171014-0655810-win64-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: %FILENAME%...
 ECHO.
@@ -118,6 +105,7 @@ ECHO Extracting files...
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
@@ -132,7 +120,7 @@ pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
@@ -158,7 +146,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20170601-bd1179e-win32-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20171014-0655810-win32-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: '%FILENAME%'...
 ECHO.
@@ -169,6 +157,7 @@ ECHO Extracting files...
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
@@ -183,7 +172,7 @@ pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
@@ -199,7 +188,7 @@ CALL NadekoInstaller.bat
 :credentials
 TITLE Downloading NadekoBot credentials.json setup files, please wait...
 SET "FILENAME=%~dp0\NadekoCredentials.bat"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBotInstallerWin/raw/1.4/NadekoCredentials.bat -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.9/NadekoCredentials.bat -OutFile '%FILENAME%'"
 ECHO NadekoBot credentials.json setup files downloaded.
 timeout /t 5
 CALL NadekoCredentials.bat
