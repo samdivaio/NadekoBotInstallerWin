@@ -68,9 +68,6 @@ IF EXIST "%root%NadekoBot\" (GOTO :backupinstall) ELSE (GOTO :freshinstall)
 	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( DEL "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" >nul 2>&1)
 	ECHO.
 	ECHO bin folder copied...
-	RD /S /Q "%root%NadekoBot_Old\src\NadekoBot\data\musicdata"
-	ECHO.
-	ECHO music cache cleared...
 	ROBOCOPY "%root%NadekoBot_Old\src\NadekoBot\data" "%installtemp%NadekoBot\src\NadekoBot\data" /E >nul 2>&1
 	IF %ERRORLEVEL% GEQ 8 (GOTO :copyerror)
 	ECHO.
