@@ -27,7 +27,7 @@ CD /D "%~dp0NadekoBot"
 dotnet restore
 dotnet build --configuration Release
 CD /D "%~dp0NadekoBot\src\NadekoBot"
-dotnet run --configuration Release
+dotnet run
 ECHO Updating...
 SET "FILENAME=%~dp0\Latest.bat"
 powershell -Command "Invoke-WebRequest https://github.com/samdivaio/NadekoBotInstallerWin/raw/1.9/Latest.bat -OutFile '%FILENAME%'"
@@ -45,7 +45,7 @@ CD /D "%~dp0NadekoBot"
 dotnet restore
 dotnet build --configuration Release
 CD /D "%~dp0NadekoBot\src\NadekoBot"
-dotnet run --configuration Release
+dotnet run
 goto autorun
 
 :Exit
