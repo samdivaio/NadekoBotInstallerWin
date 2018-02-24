@@ -226,10 +226,11 @@ GOTO MENU
 ECHO.
 ECHO Only works if the Redis is installed at its default location. e.g. "%SystemDrive%\Program Files\Redis"
 ECHO.
-IF EXIST "%SystemDrive%\Program Files\Redis" start cmd.exe /k CALL "%SystemDrive%\Program Files\Redis\redis-server.exe"
-ECHO You can close the new command window if you see something about "Server Started" or "Server TCP listening socket".
+IF EXIST "%SystemDrive%\Program Files\Redis" powershell Start-Process '%SystemDrive%\Program Files\Redis\redis-server.exe' -WindowStyle Hidden
 ECHO.
-ECHO If you see an error make sure you have the redis installed to its default directory or just find the directory and run "redis-server.exe" file. 
+ECHO Redis-server is now started, if you see the redis connection error while running the bot.
+ECHO It could mean you don't have the redis installed to its default directory.
+ECHO If so, just find the directory and run "redis-server.exe" file. 
 ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
