@@ -308,7 +308,7 @@ CLS
 ECHO.
 ECHO Check your Browser and download and install dotnet-sdk-2.1.4-win-x64.exe
 ECHO.
-ECHO (NOTE: You do not to Install the SDK Installer of .NET Core 1.0.4 from GitHub, unless you have music having no sound issue.)
+ECHO (NOTE: You do not need to Install the SDK Installer of .NET Core 1.0.4 from GitHub, unless you have "bot playing with no sound" issue.)
 ECHO.
 start https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md
 start https://www.microsoft.com/net/download/thank-you/dotnet-sdk-2.1.4-windows-x64-installer
