@@ -223,6 +223,7 @@ ECHO.
 ECHO Check your Browser and download and install the latest/stable version of redis.
 ECHO.
 start https://github.com/MicrosoftArchive/redis/releases
+start https://github.com/MicrosoftArchive/redis/releases/download/win-3.0.504/Redis-x64-3.0.504.msi
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
 GOTO MENU
