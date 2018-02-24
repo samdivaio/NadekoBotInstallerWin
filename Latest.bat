@@ -128,7 +128,7 @@ timeout /t 5
 IF EXIST "%root%NadekoBot\src\NadekoBot\_libs\32\opus.dll" (GOTO copyopus) ELSE (GOTO downloadopus)
 :downloadsodium
 SET "FILENAME=%~dp0\NadekoBot\src\NadekoBot\libsodium.dll"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/1.9/src/NadekoBot/_libs/32/libsodium.dll -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/src/NadekoBot/_libs/32/libsodium.dll -OutFile '%FILENAME%'"
 ECHO libsodium.dll downloaded.
 ECHO.
 timeout /t 5
@@ -140,7 +140,7 @@ ECHO opus.dll copied.
 GOTO end
 :downloadopus
 SET "FILENAME=%~dp0\NadekoBot\src\NadekoBot\opus.dll"
-powershell -Command "Invoke-WebRequest https://github.com/Kwoth/NadekoBot/raw/1.9/src/NadekoBot/_libs/32/opus.dll -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/src/NadekoBot/_libs/32/opus.dll -OutFile '%FILENAME%'"
 ECHO opus.dll downloaded.
 GOTO end
 :end
