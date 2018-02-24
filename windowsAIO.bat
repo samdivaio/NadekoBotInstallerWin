@@ -218,6 +218,7 @@ CALL NadekoCredentials.bat
 GOTO End
 
 :redisinstall
+CLS
 ECHO.
 ECHO Check your Browser and download and install the latest/stable version of redis.
 ECHO.
@@ -227,6 +228,7 @@ pause >nul 2>&1
 GOTO MENU
 
 :runredis
+CLS
 ECHO.
 ECHO Only works if the Redis is installed at its default location. e.g. "%SystemDrive%\Program Files\Redis"
 ECHO.
@@ -241,6 +243,7 @@ pause >nul 2>&1
 GOTO MENU
 
 :ytdl
+CLS
 ECHO.
 ECHO Install Youtube-dl from its official website, check your browser.
 ECHO and download the "Windows exe".
@@ -255,6 +258,7 @@ pause >nul 2>&1
 GOTO MENU
 
 :ytdlpath
+CLS
 ECHO.
 mkdir "%SystemDrive%\nadeko_path_registry"
 ECHO Backing up System PATH registry to "%SystemDrive%\nadeko_path_registry"
@@ -276,6 +280,7 @@ pause >nul 2>&1
 GOTO exit
 
 :redispath
+CLS
 ECHO.
 ECHO Only works if the Redis is installed at its default location. e.g. "%SystemDrive%\Program Files\Redis"
 ECHO.
@@ -312,8 +317,11 @@ pause >nul 2>&1
 GOTO MENU
 
 :installgit
+CLS
 ECHO.
 ECHO Check your Browser and download and install git from the website.
+ECHO.
+ECHO IMPORTANT: Make sure you select "Use Git from the Windows Command Prompt" when you see the option while installing it.
 ECHO.
 start https://gitforwindows.org
 ECHO Press any key to go back to menu...
