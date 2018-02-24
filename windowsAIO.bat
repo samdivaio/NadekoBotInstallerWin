@@ -17,7 +17,8 @@ ECHO 8.Install Youtube-dl. (Opens Website)
 ECHO 9.Add Youtube-dl to PATH.
 ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.)
 ECHO 11.Install .NET Core SDK (Opens Website)
-ECHO 12.To exit
+ECHO 12.Install Git. (Opens Website)
+ECHO 13.To exit
 
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
@@ -35,7 +36,8 @@ IF "%M%"=="8" GOTO ytdl
 IF "%M%"=="9" GOTO ytdlpath
 IF "%M%"=="10" GOTO redispath
 IF "%M%"=="11" GOTO dotnetinstall
-IF "%M%"=="12" GOTO exit
+IF "%M%"=="12" GOTO installgit
+IF "%M%"=="13" GOTO exit
 ECHO Invalid selection ("%M%")
 GOTO :MENU
 
@@ -305,6 +307,15 @@ ECHO (NOTE: You do not to Install the SDK Installer of .NET Core 1.0.4 from GitH
 ECHO.
 start https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md
 start https://www.microsoft.com/net/download/thank-you/dotnet-sdk-2.1.4-windows-x64-installer
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:installgit
+ECHO.
+ECHO Check your Browser and download and install git from the website.
+ECHO.
+start https://gitforwindows.org
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
 GOTO MENU
