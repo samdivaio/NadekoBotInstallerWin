@@ -16,7 +16,8 @@ ECHO 7.Run Redis (if its not running)
 ECHO 8.Install Youtube-dl. (Opens Website)
 ECHO 9.Add Youtube-dl to PATH.
 ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.)
-ECHO 11.To exit
+ECHO 11.Install .NET Core SDK (Opens Website)
+ECHO 12.To exit
 
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
@@ -33,7 +34,8 @@ IF "%M%"=="7" GOTO runredis
 IF "%M%"=="8" GOTO ytdl
 IF "%M%"=="9" GOTO ytdlpath
 IF "%M%"=="10" GOTO redispath
-IF "%M%"=="11" GOTO exit
+IF "%M%"=="11" GOTO dotnetinstall
+IF "%M%"=="12" GOTO exit
 ECHO Invalid selection ("%M%")
 GOTO :MENU
 
@@ -293,6 +295,19 @@ ECHO Restarting NadekoInstaller.bat is required.
 ECHO Press any key to exit...
 pause >nul 2>&1
 GOTO exit
+
+:dotnetinstall
+CLS
+ECHO.
+ECHO Check your Browser and download and install dotnet-sdk-2.1.4-win-x64.exe
+ECHO.
+ECHO (NOTE: You do not to Install the SDK Installer of .NET Core 1.0.4 from GitHub, unless you have music having no sound issue.)
+ECHO.
+start https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md
+start https://www.microsoft.com/net/download/thank-you/dotnet-sdk-2.1.4-windows-x64-installer
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
 
 :exit
 exit
