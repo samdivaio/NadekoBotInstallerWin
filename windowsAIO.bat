@@ -3,26 +3,39 @@ TITLE NadekoBot Client for v1.9+!
 SET "root=%~dp0"
 CD /D "%root%"
 
+:MENU
 CLS
+ECHO.
 ECHO 1.Download Latest Build
 ECHO 2.Run NadekoBot (normally)
 ECHO 3.Run NadekoBot with Auto Restart (check "if" nadeko is working properly, before using this)
 ECHO 4.Setup credentials.json
 ECHO 5.Install ffmpeg (for music)
-ECHO 6.To exit
+ECHO 6.Redis Installation (Opens Website)
+ECHO 7.Run Redis (if its not running)
+ECHO 8.Install Youtube-dl. (Opens Website)
+ECHO 9.Add Youtube-dl to PATH.
+ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.)
+ECHO 11.To exit
 
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
 ECHO.
-CHOICE /C 123456 /M "Enter your choice:"
+SET /P "M=Input>"
 
-:: Note - list ERRORLEVELS in decreasing order
-IF ERRORLEVEL 6 GOTO exit
-IF ERRORLEVEL 5 GOTO ffmpeg
-IF ERRORLEVEL 4 GOTO credentials
-IF ERRORLEVEL 3 GOTO autorestart
-IF ERRORLEVEL 2 GOTO runnormal
-IF ERRORLEVEL 1 GOTO latest
+IF "%M%"=="1" GOTO latest
+IF "%M%"=="2" GOTO runnormal
+IF "%M%"=="3" GOTO autorestart
+IF "%M%"=="4" GOTO credentials
+IF "%M%"=="5" GOTO ffmpeg
+IF "%M%"=="6" GOTO redisinstall
+IF "%M%"=="7" GOTO runredis
+IF "%M%"=="8" GOTO ytdl
+IF "%M%"=="9" GOTO ytdlpath
+IF "%M%"=="10" GOTO redispath
+IF "%M%"=="11" GOTO exit
+ECHO Invalid selection ("%M%")
+GOTO :MENU
 
 :latest
 ECHO Make sure you are running it on Windows 8 or later.
@@ -94,7 +107,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20171014-0655810-win64-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20180224-28924f4-win64-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: %FILENAME%...
 ECHO.
@@ -105,22 +118,25 @@ ECHO Extracting files...
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static"
-IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win64-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
 ECHO.
 pause
 ECHO.
-ECHO Backing up System PATH registry to "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+mkdir "%SystemDrive%\nadeko_path_registry"
+ECHO Backing up System PATH registry to "%SystemDrive%\nadeko_path_registry"
+ECHO IMPORTANT!! READ BELOW.
 ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backup.reg"
 ECHO Choose "No"!
 ECHO.
 pause
-reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
@@ -146,7 +162,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20171014-0655810-win32-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20180224-28924f4-win32-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: '%FILENAME%'...
 ECHO.
@@ -157,22 +173,25 @@ ECHO Extracting files...
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static"
-IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170601-bd1179e-win32-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
 ECHO.
 pause
 ECHO.
-ECHO Backing up System PATH registry to "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+mkdir "%SystemDrive%\nadeko_path_registry"
+ECHO Backing up System PATH registry to "%SystemDrive%\nadeko_path_registry"
+ECHO IMPORTANT!! READ BELOW.
 ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backup.reg"
 ECHO Choose "No"!
 ECHO.
 pause
-reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\ffmpeg\path_registry_backup.reg"
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
@@ -193,6 +212,86 @@ ECHO NadekoBot credentials.json setup files downloaded.
 timeout /t 5
 CALL NadekoCredentials.bat
 GOTO End
+
+:redisinstall
+ECHO.
+ECHO Check your Browser and download and install the latest/stable version of redis.
+ECHO.
+start https://github.com/MicrosoftArchive/redis/releases
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:runredis
+ECHO.
+ECHO Only works if the Redis is installed at its default location. e.g. "%SystemDrive%\Program Files\Redis"
+ECHO.
+IF EXIST "%SystemDrive%\Program Files\Redis" start cmd.exe /k CALL "%SystemDrive%\Program Files\Redis\redis-server.exe"
+ECHO You can close the new command window if you see something about "Server Started" or "Server TCP listening socket".
+ECHO.
+ECHO If you see an error make sure you have the redis installed to its default directory or just find the directory and run "redis-server.exe" file. 
+ECHO.
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:ytdl
+ECHO.
+ECHO Install Youtube-dl from its official website, check your browser.
+ECHO and download the "Windows exe".
+start https://rg3.github.io/youtube-dl/download.html
+IF EXIST "%SystemDrive%\youtube-dl" RD /S /Q "%SystemDrive%\youtube-dl"
+mkdir "%SystemDrive%\youtube-dl"
+ECHO and place the downloaded "youtube-dl.exe" to "%SystemDrive%\youtube-dl"
+ECHO Once Done, add the youtube-dl to PATH, check environment variables or just use the Option "Add Youtube-dl to PATH." to do it automatically.
+ECHO.
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:ytdlpath
+ECHO.
+mkdir "%SystemDrive%\nadeko_path_registry"
+ECHO Backing up System PATH registry to "%SystemDrive%\nadeko_path_registry"
+ECHO IMPORTANT!! READ BELOW.
+ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backup.reg"
+ECHO Choose "No"!
+ECHO.
+pause
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
+ECHO Registry file backup complete!
+@echo on
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\youtube-dl"
+@echo off
+ECHO youtube-dl PATH has been set!
+ECHO.
+ECHO Restarting NadekoInstaller.bat is required.
+ECHO Press any key to exit...
+pause >nul 2>&1
+GOTO exit
+
+:redispath
+ECHO.
+ECHO Only works if the Redis is installed at its default location. e.g. "%SystemDrive%\Program Files\Redis"
+ECHO.
+mkdir "%SystemDrive%\nadeko_path_registry"
+ECHO Backing up System PATH registry to "%SystemDrive%\nadeko_path_registry"
+ECHO IMPORTANT!! READ BELOW.
+ECHO NOTE: If you get a prompt to replace the registry file "path_registry_backup.reg"
+ECHO Choose "No"!
+ECHO.
+pause
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
+ECHO Registry file backup complete!
+@echo on
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\Program Files\Redis"
+@echo off
+ECHO Redis PATH has been set!
+ECHO.
+ECHO Restarting NadekoInstaller.bat is required.
+ECHO Press any key to exit...
+pause >nul 2>&1
+GOTO exit
 
 :exit
 exit
