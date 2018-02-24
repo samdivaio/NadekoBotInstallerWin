@@ -1,5 +1,5 @@
 @ECHO OFF
-TITLE NadekoBot Client for v1.9+!
+TITLE NadekoBot CLI for v1.9+!
 SET "root=%~dp0"
 CD /D "%root%"
 
