@@ -50,12 +50,12 @@ GOTO End
 
 :runnormal
 TITLE Downloading NadekoBot Run, please wait...
-SET "FILENAME=%~dp0\NadekoRunNormal.bat"
+SET "FILENAME=%~dp0\NadekoRun.bat"
 powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoBotInstallerWin/1.9/NadekoRun.bat -OutFile '%FILENAME%'"
 ECHO.
 ECHO Running Nadeko Normally, "if" you are running this to check Nadeko, use ".die" command on discord to stop Nadeko.
 timeout /t 10
-CALL NadekoRunNormal.bat
+CALL NadekoRun.bat
 GOTO End
 
 :autorestart
