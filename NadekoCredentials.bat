@@ -71,6 +71,8 @@ echo   "OsuApiKey": "%osu%",
 echo   "SoundCloudClientId": "%scid%",
 echo   "CarbonKey": "",
 echo   "Db": null,
+echo   "ShardRunCommand": "dotnet",
+echo   "ShardRunArguments": "run -c Release -- {0} {1}",
 echo   "TotalShards": 1
 echo }
 ) > "%root%NadekoBot\src\NadekoBot\credentials.json"
