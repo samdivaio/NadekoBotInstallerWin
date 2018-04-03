@@ -18,7 +18,7 @@ ECHO 9.Add Youtube-dl to PATH.
 ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.) (64bit)
 ECHO 11.Install .NET Core SDK (Opens Website)
 ECHO 12.Install Git. (Opens Website)
-ECHO 13.Download libsodium and opus dll files for 32bit users. (Required for 32bit, Music)
+ECHO 13.Copy opus dll files for 32bit users. (Required for 32bit, Music)
 ECHO 14.Download and run redis-server for 32bit users. (32bit)
 ECHO 15.To exit
 
@@ -357,18 +357,12 @@ pause >nul 2>&1
 GOTO MENU
 
 :installednadeko
-ECHO Downloading 32bit libs...
-ECHO Provided by github.com/MaybeGoogle/NadekoFiles
+ECHO Copying 32bit libs...
 ECHO.
-SET "FILENAME=%root%\NadekoBot\src\NadekoBot\libsodium.dll"
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/libsodium.dll -OutFile '%FILENAME%'"
+IF EXIST "%root%NadekoBot\src\NadekoBot\opus.dll" ren "%root%NadekoBot\src\NadekoBot\libsodium.dll" "opus_%date:/=-%_%time::=-%.dll_backup"
+COPY "%root%\NadekoBot\NadekoBot.Core\_libs\32\opus.dll" "%root%\NadekoBot\src\NadekoBot\opus.dll"
 
-ECHO libsodium.dll file downloaded.
-ECHO.
-SET "FILENAME=%root%\NadekoBot\src\NadekoBot\opus.dll"
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/opus.dll -OutFile '%FILENAME%'"
-
-ECHO opus.dll file downloaded.
+ECHO opus.dll file copied.
 ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
