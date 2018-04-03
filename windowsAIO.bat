@@ -340,10 +340,14 @@ ECHO Downloading 32bit libs...
 ECHO Provided by github.com/MaybeGoogle/NadekoFiles
 ECHO.
 CD "%root%\NadekoBot\src\NadekoBot"
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/MaybeGoogle/NadekoFiles/master/x86%20Prereqs/NadekoBot_Music/libsodium.dll -OutFile 'libsodium.dll'"
+
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/libsodium.dll -OutFile 'libsodium.dll'"
+
 ECHO libsodium.dll file downloaded.
 ECHO.
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/MaybeGoogle/NadekoFiles/master/x86%20Prereqs/NadekoBot_Music/opus.dll -OutFile 'opus.dll'"
+
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/opus.dll -OutFile 'opus.dll'"
+
 ECHO opus.dll file downloaded.
 CD "%root%"
 ECHO.
@@ -358,7 +362,8 @@ ECHO Downloading 32bit redis-server...
 ECHO Provided by github.com/MaybeGoogle/NadekoFiles
 ECHO.
 CD "%root%"
-powershell -NoProfile -ExecutionPolicy unrestricted  -Command "Invoke-WebRequest https://raw.githubusercontent.com/MaybeGoogle/NadekoFiles/master/x86%20Prereqs/redis-server.exe -OutFile 'redis-server.exe'"
+powershell -NoProfile -ExecutionPolicy unrestricted  -Command "Invoke-WebRequest "https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/redis-server.exe" -OutFile 'redis-server.exe'"
+
 ECHO redis-server.exe file downloaded.
 ECHO.
 ECHO Starting redis-server now...
