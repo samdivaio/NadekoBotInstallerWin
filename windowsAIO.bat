@@ -253,10 +253,19 @@ ECHO.
 ECHO Install Youtube-dl from its official website, check your browser.
 ECHO and download the "Windows exe".
 start https://rg3.github.io/youtube-dl/download.html
-IF EXIST "%SystemDrive%\youtube-dl" RD /S /Q "%SystemDrive%\youtube-dl"
+IF EXIST "%SystemDrive%\youtube-dl" (GOTO ytdlexist) ELSE (GOTO ytdlmake)
+
+:ytdlmake
+ECHO.
 mkdir "%SystemDrive%\youtube-dl"
-ECHO and place the downloaded "youtube-dl.exe" to "%SystemDrive%\youtube-dl"
-ECHO Once Done, add the youtube-dl to PATH, check environment variables or just use the Option "Add Youtube-dl to PATH." to do it automatically.
+ECHO Created "%SystemDrive%\youtube-dl" folder.
+ECHO.
+
+:ytdlexist
+ECHO.
+ECHO Place the downloaded "youtube-dl.exe" in "%SystemDrive%\youtube-dl"
+ECHO.
+ECHO Once Done, add the youtube-dl to PATH, check environment variables or just use the NadekoBot CLI Option "Add Youtube-dl to PATH." to do it automatically.
 ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
