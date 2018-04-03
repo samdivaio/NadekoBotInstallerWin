@@ -336,20 +336,30 @@ GOTO MENU
 :libs
 CLS
 ECHO.
+
+IF EXIST "%root%NadekoBot\src\NadekoBot" (GOTO installednadeko) ELSE (GOTO notinstallednadeko)
+
+:notinstallednadeko
+ECHO.
+ECHO You don't have NadekoBot installed. Please Install NadekoBot build before trying again!
+ECHO.
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:installednadeko
 ECHO Downloading 32bit libs...
 ECHO Provided by github.com/MaybeGoogle/NadekoFiles
 ECHO.
-CD "%root%\NadekoBot\src\NadekoBot"
-
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/libsodium.dll -OutFile 'libsodium.dll'"
+SET "FILENAME=%root%\NadekoBot\src\NadekoBot\libsodium.dll"
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/libsodium.dll -OutFile '%FILENAME%'"
 
 ECHO libsodium.dll file downloaded.
 ECHO.
-
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/opus.dll -OutFile 'opus.dll'"
+SET "FILENAME=%root%\NadekoBot\src\NadekoBot\opus.dll"
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/NadekoBot_Music/opus.dll -OutFile '%FILENAME%'"
 
 ECHO opus.dll file downloaded.
-CD "%root%"
 ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
@@ -361,8 +371,8 @@ ECHO.
 ECHO Downloading 32bit redis-server...
 ECHO Provided by github.com/MaybeGoogle/NadekoFiles
 ECHO.
-CD "%root%"
-powershell -NoProfile -ExecutionPolicy unrestricted  -Command "Invoke-WebRequest "https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/redis-server.exe" -OutFile 'redis-server.exe'"
+SET "FILENAME=%~dp0\redis-server.exe"
+powershell -NoProfile -ExecutionPolicy unrestricted  -Command "Invoke-WebRequest "https://raw.githubusercontent.com/samdivaio/NadekoFiles/master/x86_Prereqs/redis-server.exe" -OutFile '%FILENAME%'"
 
 ECHO redis-server.exe file downloaded.
 ECHO.
