@@ -359,7 +359,7 @@ GOTO MENU
 :installednadeko
 ECHO Copying 32bit libs...
 ECHO.
-IF EXIST "%root%NadekoBot\src\NadekoBot\opus.dll" ren "%root%NadekoBot\src\NadekoBot\libsodium.dll" "opus_%date:/=-%_%time::=-%.dll_backup"
+IF EXIST "%root%NadekoBot\src\NadekoBot\opus.dll" ren "%root%NadekoBot\src\NadekoBot\opus.dll" "opus_%date:/=-%_%time::=-%.dll_backup"
 COPY "%root%\NadekoBot\NadekoBot.Core\_libs\32\opus.dll" "%root%\NadekoBot\src\NadekoBot\opus.dll"
 
 ECHO opus.dll file copied.
