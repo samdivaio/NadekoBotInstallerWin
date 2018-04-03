@@ -118,29 +118,31 @@ ECHO Your System Architecture is 32bit...
 timeout /t 5
 ECHO.
 ECHO Getting 32bit libsodium.dll and opus.dll...
-IF EXIST "%root%NadekoBot\src\NadekoBot\_libs\32\libsodium.dll" (GOTO copysodium) ELSE (GOTO downloadsodium)
+IF EXIST "%root%\NadekoBot\NadekoBot.Core\_libs\32\libsodium.dll" (GOTO copysodium) ELSE (GOTO downloadsodium)
 :copysodium
-del "%root%NadekoBot\src\NadekoBot\libsodium.dll"
-copy "%root%NadekoBot\src\NadekoBot\_libs\32\libsodium.dll" "%root%NadekoBot\src\NadekoBot\libsodium.dll"
-ECHO libsodium.dll copied.
+del "%root%\NadekoBot\src\NadekoBot\libsodium.dll"
+IF EXIST "%root%\NadekoBot\src\NadekoBot\libsodium.dll" ren "%root%\NadekoBot\src\NadekoBot\libsodium.dll" "libsodium_%date:/=-%_%time::=-%.dll_backup"
+COPY "%root%\NadekoBot\NadekoBot.Core\_libs\32\libsodium.dll" "%root%\NadekoBot\src\NadekoBot\libsodium.dll"
+ECHO libsodium.dll file copied.
 ECHO.
 timeout /t 5
-IF EXIST "%root%NadekoBot\src\NadekoBot\_libs\32\opus.dll" (GOTO copyopus) ELSE (GOTO downloadopus)
+IF EXIST "%root%\NadekoBot\NadekoBot.Core\_libs\32\opus.dll" (GOTO copyopus) ELSE (GOTO downloadopus)
 :downloadsodium
 SET "FILENAME=%~dp0\NadekoBot\src\NadekoBot\libsodium.dll"
-powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/src/NadekoBot/_libs/32/libsodium.dll -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/NadekoBot.Core/_libs/32/libsodium.dll -OutFile '%FILENAME%'"
 ECHO libsodium.dll downloaded.
 ECHO.
 timeout /t 5
-IF EXIST "%root%NadekoBot\src\NadekoBot\_libs\32\opus.dll" (GOTO copyopus) ELSE (GOTO downloadopus)
+IF EXIST "%root%\NadekoBot\NadekoBot.Core\_libs\32\opus.dll" (GOTO copyopus) ELSE (GOTO downloadopus)
 :copyopus
-del "%root%NadekoBot\src\NadekoBot\opus.dll"
-copy "%root%NadekoBot\src\NadekoBot\_libs\32\opus.dll" "%root%NadekoBot\src\NadekoBot\opus.dll"
-ECHO opus.dll copied.
+del "%root%\NadekoBot\src\NadekoBot\opus.dll"
+IF EXIST "%root%\NadekoBot\src\NadekoBot\opus.dll" ren "%root%\NadekoBot\src\NadekoBot\opus.dll" "opus_%date:/=-%_%time::=-%.dll_backup"
+COPY "%root%\NadekoBot\NadekoBot.Core\_libs\32\opus.dll" "%root%\NadekoBot\src\NadekoBot\opus.dll"
+ECHO opus.dll file copied.
 GOTO end
 :downloadopus
 SET "FILENAME=%~dp0\NadekoBot\src\NadekoBot\opus.dll"
-powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/src/NadekoBot/_libs/32/opus.dll -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/NadekoBot.Core/_libs/32/opus.dll -OutFile '%FILENAME%'"
 ECHO opus.dll downloaded.
 GOTO end
 :end

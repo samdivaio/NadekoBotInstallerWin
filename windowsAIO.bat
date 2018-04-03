@@ -18,7 +18,7 @@ ECHO 9.Add Youtube-dl to PATH.
 ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.) (64bit)
 ECHO 11.Install .NET Core SDK (Opens Website)
 ECHO 12.Install Git. (Opens Website)
-ECHO 13.Copy opus dll files for 32bit users. (Required for 32bit, Music)
+ECHO 13.Copy libsodium and opus dll files for 32bit users. (Required for 32bit, Music)
 ECHO 14.Download and run redis-server for 32bit users. (32bit)
 ECHO 15.To exit
 
@@ -329,7 +329,7 @@ GOTO MENU
 CLS
 ECHO.
 
-IF EXIST "%root%NadekoBot\src\NadekoBot" (GOTO installednadeko) ELSE (GOTO notinstallednadeko)
+IF EXIST "%root%\NadekoBot\src\NadekoBot" (GOTO installednadeko) ELSE (GOTO notinstallednadeko)
 
 :notinstallednadeko
 ECHO.
@@ -342,10 +342,13 @@ GOTO MENU
 :installednadeko
 ECHO Copying 32bit libs...
 ECHO.
-IF EXIST "%root%NadekoBot\src\NadekoBot\opus.dll" ren "%root%NadekoBot\src\NadekoBot\opus.dll" "opus_%date:/=-%_%time::=-%.dll_backup"
+IF EXIST "%root%\NadekoBot\src\NadekoBot\opus.dll" ren "%root%NadekoBot\src\NadekoBot\opus.dll" "opus_%date:/=-%_%time::=-%.dll_backup"
 COPY "%root%\NadekoBot\NadekoBot.Core\_libs\32\opus.dll" "%root%\NadekoBot\src\NadekoBot\opus.dll"
-
 ECHO opus.dll file copied.
+ECHO.
+IF EXIST "%root%\NadekoBot\src\NadekoBot\libsodium.dll" ren "%root%NadekoBot\src\NadekoBot\libsodium.dll" "libsodium_%date:/=-%_%time::=-%.dll_backup"
+COPY "%root%\NadekoBot\NadekoBot.Core\_libs\32\libsodium.dll" "%root%\NadekoBot\src\NadekoBot\libsodium.dll"
+ECHO libsodium.dll file copied.
 ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
