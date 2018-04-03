@@ -77,26 +77,7 @@ CALL NadekoAutoRun.bat
 GOTO End
 
 :ffmpeg
-goto check_Permissions
 IF EXIST "%PROGRAMFILES(X86)%" (GOTO 64BIT) ELSE (GOTO 32BIT)
-
-:check_Permissions
-    echo Administrative permissions required. Detecting permissions...
-	echo.
-
-    net session >nul 2>&1
-    if %errorLevel% == 0 (
-        echo Success: Administrative permissions confirmed.
-		echo.
-		pause
-    ) else (
-        echo Failure: Current permissions inadequate.
-		echo.
-		echo Run again as Administrator.
-		echo.
-		pause >nul
-		goto exit
-    )
 
 :64BIT
 TITLE NadekoBot FFMPEG Installer for 64bit OS!
