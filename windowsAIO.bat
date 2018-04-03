@@ -11,14 +11,16 @@ ECHO 2.Run NadekoBot (normally)
 ECHO 3.Run NadekoBot with Auto Restart (check "if" nadeko is working properly, before using this)
 ECHO 4.Setup credentials.json
 ECHO 5.Install ffmpeg (for music)
-ECHO 6.Redis Installation (Opens Website)
-ECHO 7.Run Redis (if its not running)
+ECHO 6.Redis Installation (Opens Website) (64bit)
+ECHO 7.Run Redis (if its not running) (64bit)
 ECHO 8.Install Youtube-dl. (Opens Website)
 ECHO 9.Add Youtube-dl to PATH.
-ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.)
+ECHO 10.Add Redis to PATH. (Advanced Users Only) ("Run Redis" is enough for Normal Users.) (64bit)
 ECHO 11.Install .NET Core SDK (Opens Website)
 ECHO 12.Install Git. (Opens Website)
-ECHO 13.To exit
+ECHO 13.Download libsodium and opus dll files for 32bit users. (Required for 32bit, Music)
+ECHO 14.Download and run redis-server for 32bit users. (32bit)
+ECHO 15.To exit
 
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
@@ -37,7 +39,9 @@ IF "%M%"=="9" GOTO ytdlpath
 IF "%M%"=="10" GOTO redispath
 IF "%M%"=="11" GOTO dotnetinstall
 IF "%M%"=="12" GOTO installgit
-IF "%M%"=="13" GOTO exit
+IF "%M%"=="13" GOTO libs
+IF "%M%"=="14" GOTO 32bitredis
+IF "%M%"=="15" GOTO exit
 ECHO Invalid selection ("%M%")
 GOTO :MENU
 
@@ -325,6 +329,48 @@ ECHO.
 ECHO IMPORTANT: Make sure you select "Use Git from the Windows Command Prompt" when you see the option while installing it.
 ECHO.
 start https://gitforwindows.org
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:libs
+CLS
+ECHO.
+ECHO Downloading 32bit libs...
+ECHO Provided by github.com/MaybeGoogle/NadekoFiles
+ECHO.
+SET "lib1=%~dp0\NadekoBot\src\NadekoBot\libsodium.dll"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/MaybeGoogle/NadekoFiles/master/x86%20Prereqs/NadekoBot_Music/libsodium.dll -OutFile '%lib1%'"
+ECHO libsodium.dll file downloaded.
+ECHO.
+SET "lib2=%~dp0\NadekoBot\src\NadekoBot\opus.dll"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/MaybeGoogle/NadekoFiles/master/x86%20Prereqs/NadekoBot_Music/opus.dll -OutFile '%lib2%'"
+ECHO opus.dll file downloaded.
+ECHO.
+ECHO Press any key to go back to menu...
+pause >nul 2>&1
+GOTO MENU
+
+:32bitredis
+CLS
+ECHO.
+ECHO Downloading 32bit redis-server...
+ECHO Provided by github.com/MaybeGoogle/NadekoFiles
+ECHO.
+SET "redis32bit=%root%\redis-server.exe"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/MaybeGoogle/NadekoFiles/master/x86%20Prereqs/redis-server.exe -OutFile '%redis32bit%'"
+ECHO redis-server.exe file downloaded.
+ECHO.
+ECHO Starting redis-server now...
+ECHO.
+ECHO Works if the redis-server.exe is present at the location: "%root%"
+ECHO.
+IF EXIST "%root%\redis-server.exe" powershell Start-Process '%root%\redis-server.exe' -WindowStyle Hidden
+ECHO.
+ECHO Redis-server is now started, if you see the redis connection error while running the bot.
+ECHO It could mean you don't have the redis installed to its default directory.
+ECHO If so, just find the directory and run the 32bit "redis-server.exe" file. 
+ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
 GOTO MENU
