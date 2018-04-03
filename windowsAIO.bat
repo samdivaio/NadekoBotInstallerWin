@@ -81,6 +81,7 @@ IF EXIST "%PROGRAMFILES(X86)%" (GOTO 64BIT) ELSE (GOTO 32BIT)
 
 :64BIT
 TITLE NadekoBot FFMPEG Installer for 64bit OS!
+CLS
 ECHO.
 ECHO Welcome to NadekoBot FFMPEG Installer! 
 ECHO.
@@ -136,6 +137,7 @@ GOTO exit
 
 :32BIT
 TITLE NadekoBot FFMPEG Installer for 32bit OS!
+CLS
 ECHO.
 ECHO Welcome to NadekoBot FFMPEG Installer! 
 ECHO.
