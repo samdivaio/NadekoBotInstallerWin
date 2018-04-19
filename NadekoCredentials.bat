@@ -3,6 +3,14 @@
 SET root=%~dp0
 CD /D %root%
 
+call :guide %%%%1 %%%%2 %%%%3 %%%%4 %%%%5 %%%%6 %%%%7 %%%%8 %%%%9
+goto end
+
+:guide
+start https://nadekobot.readthedocs.io/en/latest/JSON%20Explanations/
+
+:end
+
 IF EXIST "%root%NadekoBot\src\NadekoBot" (GOTO installed) ELSE (GOTO notinstalled)
 
 :notinstalled
@@ -19,7 +27,6 @@ echo.
 echo Please make sure you have all the required informations to setup the credentials.json before continuing...
 echo.
 echo Refer to the hosting documents for more info...
-start https://nadekobot.readthedocs.io/en/latest/JSON%20Explanations/
 echo.
 pause
 IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json" (GOTO backup) ELSE (GOTO create)
