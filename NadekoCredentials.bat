@@ -10,7 +10,7 @@ goto end
 start https://nadekobot.readthedocs.io/en/latest/JSON%20Explanations/
 
 :end
-
+cls
 IF EXIST "%root%NadekoBot\src\NadekoBot" (GOTO installed) ELSE (GOTO notinstalled)
 
 :notinstalled
