@@ -19,6 +19,7 @@ echo.
 echo Please make sure you have all the required informations to setup the credentials.json before continuing...
 echo.
 echo Refer to the hosting documents for more info...
+start https://nadekobot.readthedocs.io/en/latest/JSON%20Explanations/
 echo.
 pause
 IF EXIST "%root%NadekoBot\src\NadekoBot\credentials.json" (GOTO backup) ELSE (GOTO create)
@@ -40,8 +41,6 @@ GOTO create
 cls
 set /p client=Please enter your Client ID:
 cls
-set /p botid=Please enter your Bot ID (it is same as the client ID for new users):
-cls
 set /p token=Please enter your Bot Token ~59 characters long(it is not the Client Secret, Please make sure you enter the Token and not Client Secret):
 cls
 set /p owner=Please enter your Owner ID:
@@ -56,10 +55,11 @@ set /p osu=Please enter your OsuApiKey (Optional!! You can skip this step pressi
 cls
 set /p scid=Please enter your SoundCloudClientId (Optional!! You can skip this step pressing Enter key):
 cls
+set /p clvrapi=Please enter your CleverbotApiKey (Optional!! You can skip this step pressing Enter key):
+cls
 (
 echo {
 echo   "ClientId": %client%,
-echo   "BotId": %botid%,
 echo   "Token": "%token%",
 echo   "OwnerIds": [
 echo     %owner%,
@@ -69,11 +69,17 @@ echo   "GoogleApiKey": "%googleapi%",
 echo   "MashapeKey": "%mashape%",
 echo   "OsuApiKey": "%osu%",
 echo   "SoundCloudClientId": "%scid%",
+echo   "CleverbotApiKey": "%clvrapi%",
+echo   "TwitchClientId": null,
 echo   "CarbonKey": "",
 echo   "Db": null,
+echo   "RestartCommand": {
+echo       "Cmd": "dotnet",
+echo       "Args": "run -c Release"
+echo   },
 echo   "ShardRunCommand": "dotnet",
 echo   "ShardRunArguments": "run -c Release -- {0} {1}",
-echo   "TotalShards": 1
+echo   "TotalShards": 1,
 echo }
 ) > "%root%NadekoBot\src\NadekoBot\credentials.json"
 echo.
