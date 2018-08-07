@@ -97,7 +97,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20180224-28924f4-win64-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20180806-076b196-win64-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: %FILENAME%...
 ECHO.
@@ -110,6 +110,7 @@ IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win64-static" RD /S /Q "%
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
@@ -153,7 +154,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20180224-28924f4-win32-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20180806-076b196-win32-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: '%FILENAME%'...
 ECHO.
@@ -166,6 +167,7 @@ IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170225-7e4f32f-win32-static" RD /S /Q "%
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
@@ -303,12 +305,12 @@ GOTO exit
 :dotnetinstall
 CLS
 ECHO.
-ECHO Check your Browser and download and install dotnet-sdk-2.1.4-win-x64.exe
+ECHO Check your Browser and download and install dotnet-sdk
 ECHO.
 ECHO (NOTE: You do not need to Install the SDK Installer of .NET Core 1.0.4 from GitHub, unless you have "bot playing with no sound" issue.)
 ECHO.
 start https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md
-start https://www.microsoft.com/net/download/thank-you/dotnet-sdk-2.1.4-windows-x64-installer
+start https://www.microsoft.com/net/download/thank-you/dotnet-sdk-2.1.302-windows-x64-installer
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
 GOTO MENU
