@@ -127,7 +127,7 @@ pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win64-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
@@ -184,7 +184,7 @@ pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win32-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
