@@ -59,13 +59,17 @@ IF EXIST "%root%NadekoBot\" (GOTO :backupinstall) ELSE (GOTO :freshinstall)
 	ECHO credentials.json copied...
 	ROBOCOPY "%root%NadekoBot_Old\src\NadekoBot\bin" "%installtemp%NadekoBot\src\NadekoBot\bin" /E >nul 2>&1
 	IF %ERRORLEVEL% GEQ 8 (GOTO :copyerror)
-	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" >nul 2>&1)
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.1\data\NadekoBot.db" >nul 2>&1)
 	timeout /t 2
-	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" >nul 2>&1)
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.1\data\NadekoBot.db" >nul 2>&1)
 	timeout /t 2
-	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( DEL "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" >nul 2>&1)
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" ( COPY "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.1\data\NadekoBot.db" >nul 2>&1)
+	timeout /t 2
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" ( RENAME "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.0\data\NadekoBot.db" "NadekoBot_old.db" >nul 2>&1)
 	ECHO.
-	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( DEL "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" >nul 2>&1)
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" ( RENAME "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp1.1\data\NadekoBot.db" "NadekoBot_old.db" >nul 2>&1)
+	ECHO.
+	IF EXIST "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" ( RENAME "%installtemp%NadekoBot\src\NadekoBot\bin\Release\netcoreapp2.0\data\NadekoBot.db" "NadekoBot_old.db" >nul 2>&1)
 	ECHO.
 	ECHO bin folder copied...
 	ROBOCOPY "%root%NadekoBot_Old\src\NadekoBot\data" "%installtemp%NadekoBot\src\NadekoBot\data" /E >nul 2>&1
