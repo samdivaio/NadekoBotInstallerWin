@@ -37,7 +37,7 @@ IF "%M%"=="7" GOTO runredis
 IF "%M%"=="8" GOTO ytdl
 IF "%M%"=="9" GOTO ytdlpath
 IF "%M%"=="10" GOTO redispath
-IF "%M%"=="11" GOTO dotnetinstall
+IF "%M%"=="11" GOTO dnetinstl
 IF "%M%"=="12" GOTO installgit
 IF "%M%"=="13" GOTO libs
 IF "%M%"=="14" GOTO 32bitredis
@@ -302,15 +302,22 @@ ECHO Press any key to exit...
 pause >nul 2>&1
 GOTO exit
 
-:dotnetinstall
+:dnetinstl
 CLS
 ECHO.
-ECHO Check your Browser and download and install dotnet-sdk
+ECHO Check your Browser and download and install ".NET Core SDK"
 ECHO.
-ECHO (NOTE: You do not need to Install the SDK Installer of .NET Core 1.0.4 from GitHub, unless you have "bot playing with no sound" issue.)
+ECHO (NOTE: You do not need to Install the "SDK Installer" of .NET Core 1.0.4 from GitHub, unless you have "bot playing with no sound" issue.)
 ECHO.
+ECHO Press any key to continue...
+pause >nul 2>&1
+
+start https://www.microsoft.com/net/download
+
+ECHO.
+
 start https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md
-start https://www.microsoft.com/net/download/thank-you/dotnet-sdk-2.1.302-windows-x64-installer
+
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
 GOTO MENU
