@@ -21,6 +21,8 @@ IF ERRORLEVEL 2 GOTO autorun
 IF ERRORLEVEL 1 GOTO latestar
 
 :latestar
+ECHO Updating Youtube-dl (works if you added Youtube-dl to PATH)
+youtube-dl -U
 ECHO Auto Restart and Update with Dev Build (latest)
 ECHO Bot will auto update on every restart!
 CD /D "%~dp0NadekoBot"
@@ -38,6 +40,8 @@ CALL Latest.bat
 GOTO latestar
 
 :autorun
+ECHO Updating Youtube-dl (works if you added Youtube-dl to PATH)
+youtube-dl -U
 ECHO Normal Auto Restart
 ECHO Bot will not auto update on every restart!
 timeout /t 3
