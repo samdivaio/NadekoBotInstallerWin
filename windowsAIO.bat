@@ -97,7 +97,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20180806-076b196-win64-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20190129-2e2b44b-win64-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: %FILENAME%...
 ECHO.
@@ -111,6 +111,7 @@ IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170111-e71b811-win64-static" RD /S /Q "%
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win64-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20190129-2e2b44b-win64-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20190129-2e2b44b-win64-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
@@ -127,7 +128,7 @@ pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win64-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20190129-2e2b44b-win64-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
@@ -154,7 +155,7 @@ mkdir "%SystemDrive%\ffmpeg\"
 SET "FILENAME=%SystemDrive%\ffmpeg\ffmpeg.zip"
 ECHO.
 ECHO Downloading ffmpeg, please wait...
-powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20180806-076b196-win32-static.zip -OutFile '%FILENAME%'"
+powershell -Command "Invoke-WebRequest https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20190129-2e2b44b-win32-static.zip -OutFile '%FILENAME%'"
 ECHO.
 ECHO ffmpeg zip downloaded: '%FILENAME%'...
 ECHO.
@@ -168,6 +169,7 @@ IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20170125-2080bc3-win32-static" RD /S /Q "%
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20171014-0655810-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180224-28924f4-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win32-static"
+IF EXIST "%SystemDrive%\ffmpeg\ffmpeg-20190129-2e2b44b-win32-static" RD /S /Q "%SystemDrive%\ffmpeg\ffmpeg-20190129-2e2b44b-win32-static"
 IF EXIST "%SystemDrive%\ffmpeg\ffmpeg.zip" powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\ffmpeg\ffmpeg.zip"', '%SystemDrive%\ffmpeg\'); }"
 ECHO.
 ECHO ffmpeg extracted to %SystemDrive%\ffmpeg\
@@ -184,7 +186,7 @@ pause
 reg export "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "%SystemDrive%\nadeko_path_registry\path_registry_backup_%date:/=-%_%time::=-%.reg"
 ECHO Registry file backup complete!
 @echo on
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20180806-076b196-win32-static\bin"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /f /v "path" /t REG_SZ /d "%path%;%SystemDrive%\ffmpeg\ffmpeg-20190129-2e2b44b-win32-static\bin"
 @echo off
 ECHO ffmpeg path has been set!
 ECHO.
