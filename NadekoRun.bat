@@ -1,5 +1,7 @@
 @ECHO off
 @TITLE NadekoBot
+ECHO Updating Youtube-dl (works if you added Youtube-dl to PATH)
+youtube-dl -U
 CD /D "%~dp0NadekoBot"
 dotnet restore
 dotnet build --configuration Release
