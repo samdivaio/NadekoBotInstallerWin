@@ -20,7 +20,8 @@ ECHO 11.Install .NET Core SDK (Opens Website)
 ECHO 12.Install Git. (Opens Website)
 ECHO 13.Copy libsodium and opus dll files for 32bit users. (Required for 32bit, Music)
 ECHO 14.Download and run redis-server for 32bit users. (32bit)
-ECHO 15.To exit
+ECHO 15.[NEW] NadekoBot Extensions
+ECHO 16.To exit
 
 ECHO.
 ECHO Make sure you are running NadekoInstaller.bat as Administrator!
@@ -41,7 +42,8 @@ IF "%M%"=="11" GOTO dnetinstl
 IF "%M%"=="12" GOTO installgit
 IF "%M%"=="13" GOTO libs
 IF "%M%"=="14" GOTO 32bitredis
-IF "%M%"=="15" GOTO exit
+IF "%M%"=="15" GOTO nadekoextwin
+IF "%M%"=="16" GOTO exit
 ECHO Invalid selection ("%M%")
 GOTO :MENU
 
@@ -389,6 +391,17 @@ ECHO.
 ECHO Press any key to go back to menu...
 pause >nul 2>&1
 GOTO MENU
+
+:nadekoextwin
+ECHO.
+timeout /t 10
+TITLE Downloading NadekoBot Extensions patcher, please wait...
+SET "FILENAME=%~dp0\nadekoextwin.bat"
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoBot-Extensions/master/nadekoextwin.bat -OutFile '%FILENAME%'"
+ECHO NadekoBot Extensions patcher downloaded.
+timeout /t 5
+CALL nadekoextwin.bat
+GOTO End
 
 :exit
 exit

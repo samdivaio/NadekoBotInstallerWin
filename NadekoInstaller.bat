@@ -31,6 +31,7 @@ IF EXIST "%root%NadekoAutoRun.bat" del "%root%NadekoAutoRun.bat"
 IF EXIST "%root%NadekoRun.bat" del "%root%NadekoRun.bat"
 IF EXIST "%root%Stable.bat" del "%root%Stable.bat"
 IF EXIST "%root%Latest.bat" del "%root%Latest.bat"
+IF EXIST "%root%Latest.bat" del "%root%nadekoextwin.bat"
 SET "FILENAME=%root%windowsAIO.bat"
 powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/samdivaio/NadekoBotInstallerWin/1.9/windowsAIO.bat -OutFile '%FILENAME%'"
 CALL windowsAIO.bat
@@ -40,6 +41,7 @@ IF EXIST "%root%NadekoAutoRun.bat" del "%root%NadekoAutoRun.bat"
 IF EXIST "%root%NadekoRun.bat" del "%root%NadekoRun.bat"
 IF EXIST "%root%Stable.bat" del "%root%Stable.bat"
 IF EXIST "%root%Latest.bat" del "%root%Latest.bat"
+IF EXIST "%root%Latest.bat" del "%root%nadekoextwin.bat"
 pause
 
 
