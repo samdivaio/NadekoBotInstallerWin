@@ -7,7 +7,7 @@ call :guide %%%%1 %%%%2 %%%%3 %%%%4 %%%%5 %%%%6 %%%%7 %%%%8 %%%%9
 goto end
 
 :guide
-start https://nadekobot.readthedocs.io/en/latest/JSON%20Explanations/
+start https://nadekobot.readthedocs.io/en/latest/jsons-explained/
 
 :end
 cls
